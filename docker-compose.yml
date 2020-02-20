@@ -7,23 +7,18 @@ services:
             - 443:443
         volumes:
             - '.:/var/www/html'
-        # env_file:
-        #     - .env
         environment:
             SITE_URL: 'https://localhost'
             DB_DSN: 'mysql:host=db;port=3306;dbname=craft'
+            DB_USER: craft
             DB_PASSWORD: craft
 
             # Postgres
             # DB_DSN: 'pgsql:host=db;port=5432;dbname=craft'
+        # Hook-in the dot env at the container level
+        # env_file:
+        #     - .env
     db:
-        # image: postgres:11-alpine
-        # ports:
-        #     - 5432:5432
-        # environment:
-        #     POSTGRES_PASSWORD: password
-        #     POSTGRES_USER: craft
-        #     POSTGRES_DATABASE: craft
         image: mysql:5.7
         ports:
             - 3306:3306
@@ -32,3 +27,12 @@ services:
             MYSQL_DATABASE: craft
             MYSQL_USER: craft
             MYSQL_PASSWORD: craft
+
+        # POSTGRES
+        # image: postgres:11-alpine
+        # ports:
+        #     - 5432:5432
+        # environment:
+        #     POSTGRES_PASSWORD: password
+        #     POSTGRES_USER: craft
+        #     POSTGRES_DATABASE: craft
